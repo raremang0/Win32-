@@ -18,25 +18,23 @@ DWORD WINAPI ThreadProc1(
 )
 {
 	TCHAR buffer[10];
+	TCHAR buffer1[10];
 	memset(buffer, 0, 10);
-	DWORD Temp1 = 0;
+	memset(buffer1, 0, 10);
+	DWORD Temp = 0;
 
-	if (Money<=50)
+	while (Money > 0)
 	{
-		ExitThread(1);
-	}
-
-	while (Money > 50)
-	{
-		Sleep(1000);
-
+	
 		EnterCriticalSection(&csMoney);
 		Money = Money - 50;
-		Temp1 = Temp1 + 50;
+		Temp = Temp + 50;
+		sprintf(buffer, "%d", Money);
+		sprintf(buffer1, "%d", Temp);
+		SetWindowText(hEditIn, buffer);
+		SetWindowText(hEdit1, buffer1);
 		LeaveCriticalSection(&csMoney);
-
-		sprintf(buffer, "%d", Temp1);
-		SetWindowText(hEdit1, buffer);
+		Sleep(100);
 	}
 
 	return 0;
@@ -49,24 +47,23 @@ DWORD WINAPI ThreadProc2(
 )
 {
 	TCHAR buffer[10];
+	TCHAR buffer1[10];
 	memset(buffer, 0, 10);
-	DWORD Temp1 = 0;
+	memset(buffer1, 0, 10);
+	DWORD Temp = 0;
 
-	if (Money <= 50)
+	while (Money > 0)
 	{
-		ExitThread(2);
-	}
 
-	while (Money > 50)
-	{
-		Sleep(1000);
-
-		EnterCriticalSection(&csMoney);	
-		Temp1 = Temp1 + 50;
+		EnterCriticalSection(&csMoney);
+		Money = Money - 50;
+		Temp = Temp + 50;
+		sprintf(buffer, "%d", Money);
+		sprintf(buffer1, "%d", Temp);
+		SetWindowText(hEditIn, buffer);
+		SetWindowText(hEdit2, buffer1);
 		LeaveCriticalSection(&csMoney);
-
-		sprintf(buffer, "%d", Temp1);
-		SetWindowText(hEdit1, buffer);
+		Sleep(100);
 	}
 
 	return 0;
@@ -79,25 +76,23 @@ DWORD WINAPI ThreadProc3(
 )
 {
 	TCHAR buffer[10];
+	TCHAR buffer1[10];
 	memset(buffer, 0, 10);
-	DWORD Temp1 = 0;
+	memset(buffer1, 0, 10);
+	DWORD Temp = 0;
 
-	if (Money <= 50)
+	while (Money > 0)
 	{
-		ExitThread(3);
-	}
-
-	while (Money > 50)
-	{
-		Sleep(1000);
 
 		EnterCriticalSection(&csMoney);
 		Money = Money - 50;
-		Temp1 = Temp1 + 50;
+		Temp = Temp + 50;
+		sprintf(buffer, "%d", Money);
+		sprintf(buffer1, "%d", Temp);
+		SetWindowText(hEditIn, buffer);
+		SetWindowText(hEdit3, buffer1);
 		LeaveCriticalSection(&csMoney);
-
-		sprintf(buffer, "%d", Temp1);
-		SetWindowText(hEdit1, buffer);
+		Sleep(100);
 	}
 
 	return 0;
@@ -187,10 +182,10 @@ int WINAPI WinMain(
 
 )
 {
-	
+
 	DialogBox(hInstance, MAKEINTRESOURCE(IDD_DIALOG), NULL, DialogProc);
 
-	
+
 	
 	return 0;
 }
